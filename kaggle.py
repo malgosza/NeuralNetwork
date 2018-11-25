@@ -289,7 +289,7 @@ if(VALIDATION_SIZE):
     plt.show()
 
 # read test data from CSV file
-test_images = pd.read_csv('test.csv').values
+test_images = pd.read_csv('asd.csv').values
 test_images = test_images.astype(np.float)
 
 # convert from [0:255] => [0.0:1.0]
@@ -299,13 +299,15 @@ test_images = np.multiply(test_images, 1.0 / 255.0)
 
 
 # predict test set
-#predicted_lables = predict.eval(feed_dict={x: test_images, keep_prob: 1.0})
+predicted_lables = predict.eval(feed_dict={x: test_images, keep_prob: 1.0})
+print("wynik:" + str(predicted_lables))
 
+# odkomentowac dla innych danych (z pliku test.csv)
 # using batches is more resource efficient
-predicted_lables = np.zeros(test_images.shape[0])
-for i in range(0,test_images.shape[0]//BATCH_SIZE):
-    predicted_lables[i*BATCH_SIZE : (i+1)*BATCH_SIZE] = predict.eval(feed_dict={x: test_images[i*BATCH_SIZE : (i+1)*BATCH_SIZE],
-                                                                                keep_prob: 1.0})
+# predicted_lables = np.zeros(test_images.shape[0])
+# for i in range(0,test_images.shape[0]//BATCH_SIZE):
+#     predicted_lables[i*BATCH_SIZE : (i+1)*BATCH_SIZE] = predict.eval(feed_dict={x: test_images[i*BATCH_SIZE : (i+1)*BATCH_SIZE],
+#                                                                                 keep_prob: 1.0})
 
 
 # print('predicted_lables({0})'.format(len(predicted_lables)))
