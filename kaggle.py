@@ -7,13 +7,13 @@ import tensorflow as tf
 
 LEARNING_RATE = 1e-4
 # set to 20000 on local environment to get 0.99 accuracy
-TRAINING_ITERATIONS = 100
+TRAINING_ITERATIONS = 2500
 
 DROPOUT = 0.5
 BATCH_SIZE = 50
 
 # set to 0 to train on all available data
-VALIDATION_SIZE =100
+VALIDATION_SIZE =2000
 
 # image number to output
 IMAGE_TO_DISPLAY = 10
@@ -47,7 +47,7 @@ def display(img):
 
     plt.axis('off')
     plt.imshow(one_image, cmap=cm.binary)
-    # plt.show()
+    plt.show()
 
 # output image
 # display(images[IMAGE_TO_DISPLAY])
