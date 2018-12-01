@@ -369,6 +369,7 @@ test_images = np.multiply(obrazekDoSieci, 1.0 / 255.0)
 
 # print('test_images({0[0]},{0[1]})'.format(test_images.shape))
 
+saver.restore(sess,'modele/myModel')
 # predict test set
 predicted_lables = predict.eval(feed_dict={x: test_images, keep_prob: 1.0})
 print("wynik:" + str(predicted_lables))
