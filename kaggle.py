@@ -76,7 +76,7 @@ obrazekDoSieci=np.array([np.ravel(newImage)])
 
 LEARNING_RATE = 1e-4#jak to zmniejsze i doloze iteracje to uzyskam moj wykres
 # set to 20000 on local environment to get 0.99 accuracy
-TRAINING_ITERATIONS = 2500
+TRAINING_ITERATIONS = 10
 
 DROPOUT = 0.5
 BATCH_SIZE = 50#ile probek jest wrzucane do sieci na raz -HIPERARAMETRY
@@ -341,6 +341,9 @@ for i in range(TRAINING_ITERATIONS):
     # train on batch
     sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys, keep_prob: DROPOUT})
 
+saver = tf.train.Saver()
+saver.save(sess,'modele/myModel')
+
 # check final accuracy on validation set
 if(VALIDATION_SIZE):
     validation_accuracy = accuracy.eval(feed_dict={x: validation_images,
@@ -365,7 +368,6 @@ if(VALIDATION_SIZE):
 test_images = np.multiply(obrazekDoSieci, 1.0 / 255.0)
 
 # print('test_images({0[0]},{0[1]})'.format(test_images.shape))
-
 
 # predict test set
 predicted_lables = predict.eval(feed_dict={x: test_images, keep_prob: 1.0})
