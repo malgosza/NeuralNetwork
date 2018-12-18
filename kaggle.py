@@ -311,6 +311,7 @@ x_range = []
 
 display_step = 1
 
+saver = tf.train.Saver()
 if len(os.listdir('modele'))==0:
     for i in range(TRAINING_ITERATIONS):
 
@@ -343,11 +344,10 @@ if len(os.listdir('modele'))==0:
         # train on batch
         sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys, keep_prob: DROPOUT})
 
-    saver = tf.train.Saver()
     saver.save(sess,'modele/myModel')
 
 else:
-
+    saver.restore(sess, 'modele/myModel')
 # check final accuracy on validation set
 if(VALIDATION_SIZE):
     validation_accuracy = accuracy.eval(feed_dict={x: validation_images,
@@ -373,7 +373,8 @@ test_images = np.multiply(obrazekDoSieci, 1.0 / 255.0)
 
 # print('test_images({0[0]},{0[1]})'.format(test_images.shape))
 
-saver.restore(sess,'modele/myModel')
+# saver.restore(sess,'modele/myModel')
+
 # predict test set
 predicted_lables = predict.eval(feed_dict={x: test_images, keep_prob: 1.0})
 print("wynik:" + str(predicted_lables))
